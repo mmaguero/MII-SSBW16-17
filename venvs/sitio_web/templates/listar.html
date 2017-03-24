@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://v4-alpha.getbootstrap.com/favicon.ico">
+
+    <title>Restaurant Simple CRUD</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://v4-alpha.getbootstrap.com/examples/navbar-top/navbar-top.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </head>
+
+  <body>
+
+    <!--<div class="collapse" id="navbar-header" aria-expanded="false" style="height: 0px;">
+      <div class="container-fluid inverse p-a">-->
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Menu</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">List <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Add</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Logout</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'buscar' %}">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search 'Cuisine Type'" name="cocina">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+      <!--</div>
+    </div>
+    <div class="navbar navbar-default navbar-static-top">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-header" aria-expanded="false">
+        ☰
+      </button>
+    </div>-->
+<br/>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Restaurants</h1>
+        <p class="lead">Very simple CRUD with Django for Restaurants...</p>
+        <p class="lead"><a class="btn btn-lg btn-primary" href="{% url 'listar' %}" role="button">List them »</a> or...</p>
+        <form class="navbar-form navbar-right" method="get" action="{% url 'buscar' %}">
+                <input type="text" class="form-control" placeholder="Write 'Cuisine Type' and and press Enter key..." name="cocina">
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+<h3>First 50...</h3>
+<table class="table table-responsive">
+  <thead class="thead-default">
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Cuisine</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in resta %}
+    <tr>
+      <th scope="row">{{r.restaurant_id}}</th>
+      <td>{{r.name}}</td>
+      <td>{{r.cuisine}}</td>
+      <td><a class="btn btn-lg btn-tertiary" href="#" role="button">Edit »</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

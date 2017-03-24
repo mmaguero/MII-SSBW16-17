@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Instalación de Django</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-markup.min.js"></script>
+<style>
+p {text-indent: 0em;
+   font-size: 120%;
+   margin-top: 2em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+   <br>
+   <h2>Instalación de Django</h2>
+<p>
+   Para esta tarea instalaremos el framework <a href="https://www.djangoproject.com/">Django</a>,
+   y pasaremos el código y los templatess de las tareas anteriores para que funcionen en Django
+</p>
+
+<p>
+ Seguiremos los pasos de <a href="http://drksephy.github.io/2015/07/16/django/">este tutorial</a>
+</p>
+
+<div class="highlight">
+ <pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>pip install django</code></pre>
+</div>
+
+<div class="highlight">
+ <pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>django-admin startproject sitio_web</code></pre>
+</div>
+
+que nos creará la estructura de directorios y archivos para nuestras aplicaciones<br>
+<br />
+Podemos compropbar que funciona iniciando el servidor de desarrollo
+
+ <pre>
+<code class="language-bash" data-lang="bash"><span class="nv">$ </span>cd sitio_web</code>
+<code class="language-bash" data-lang="bash"><span class="nv">$ </span>python manage.py runserver</code></pre>
+
+<br />
+Creamos ahora una aplicación dentro del projecto
+
+<pre>
+<code class="language-bash" data-lang="bash"><span class="nv">$ </span>python manage.py startapp restaurantes</code>
+</pre>
+<br />
+Creamos un directorio para los templates y para los archivos estaticos
+<pre>
+<code class="language-bash" data-lang="bash"><span class="nv">$ </span>mkdir templates</code>
+<code class="language-bash" data-lang="bash"><span class="nv">$ </span>mkdir static</code>
+</pre>
+y los apuntamos en el archivo <code>sitio_web/settings.py</code>
+
+<pre>
+<code class="language-python" data-lang="python"><span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
+<span  class="p">{</span>
+<span class="n">'DIRS':</span><span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s">'templates'</span><span class="p">)]</span></code>
+<span  class="n">...</span>
+</pre>
+
+<pre>
+<code class="language-python" data-lang="python"><span class="n">STATICFILES_DIRS</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s">'static'</span><span class="p">)]</span></code>
+</pre>
+
+<br />
+y apuntamos también nuesta aplicación
+
+<pre>
+<code class="language-python" data-lang="python"><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="s">'django.contrib.admin'</span><span class="p">,</span>
+  <span class="s">'django.contrib.auth'</span><span class="p">,</span>
+  <span class="s">'django.contrib.contenttypes'</span><span class="p">,</span>
+  <span class="s">'django.contrib.sessions'</span><span class="p">,</span>
+  <span class="s">'django.contrib.messages'</span><span class="p">,</span>
+  <span class="s">'django.contrib.staticfiles'</span><span class="p">,</span>
+  <span class="s">'restaurantes'</span><span class="p">,</span>
+<span class="p">)</span></code>
+</pre>
+<br />
+Ahora podemos iniciar la bases de datos SQL que usaremos para los datos autentificación y registro
+de usuarios, para los restaurantes seguimos usando mongoDB
+
+ <pre>
+<code class="language-bash" data-lang="bash"><span class="nv">$ </span>python manage.py migrate</code>
+</pre>
+Esto habrá que hacerlo cada vez que hagamos cambios en la BD SQL<br>
+<br>
+Creamos ahora  un administrador de la BD
+
+ <pre>
+<code class="language-bash" data-lang="bash"><span class="nv">$ </span>python manage.py createsuperuser</code>
+</pre>
+<br />
+y tendremos acceso a la aplicación de administración de la BD en:
+<pre><code> http://localhost:8000/admin
+</code></pre>
+<p>
+   8000 es el puerto por defecto, se puede lanzar desde otro puerto:
+    <pre>
+ <code class="language-bash" data-lang="bash"><span class="nv">$ </span>python manage.py runserver 0.0.0.0:5000</code></pre>
+</p>
+
+
+<p>
+   Y podemos ahora hacer una aplicación siguiendo los pasos desde el <i>Step 3: Your first view</i> del tutorial, pero
+   usando la base de datos de mongo, y las templates de las tareas anteriores:
+</p>
+<p>
+   Solo tendremos que cambiar, el enrutador (ahora en dos archivos aparte):
+
+   <pre><code class="language-python" data-lang="python"><span class="c"># sitio_web/urls.py</span>
+
+   <span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">url</span>
+   <span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+
+   <span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^restaurantes/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;restaurantes.urls&#39;</span><span class="p">)),</span>
+     <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span>
+   <span class="p">]</span></code></pre>
+
+y en un nuevo archivo donde especificamos las rutas que comiencen por <code>restaurantes/</code>
+
+<pre><code class="language-python" data-lang="python"><span class="c"># restaurantes/urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;index&#39;</span><span class="p">),</span>
+  <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^test/$&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">test</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">),</span>
+<span class="p">]</span></code></pre>
+</p>
+
+El código lo pondremos en el archivo <code>views.py</code>
+
+
+<pre><code class="language-python" data-lang="python"><span class="c"># views.py</span>
+
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">HttpResponse</span>
+
+<span class="c"># Create your views here.</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&#39;Hello World!&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    context = {}   # Aquí van la las variables para la plantilla
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s">&#39;test.html&#39;</span><span class="p">, context)</span></code></pre>
+
+
+<p>
+
+
+Django utiliza una <a href="https://tutorial.djangogirls.org/en/django_templates/">libreria de templates</a>, muy parecida al Jinja2 de flask, solo cambian
+las instrucciones para cargar los archivos estaticos y los nombres de los enlaces
+
+<pre><code class="language-markup" data-lang="markup">
+   {% load static %}
+   ...
+  &lt;link  href="{% static 'css/style.css' %}" rel="stylesheet" media="screen"&gt;
+  ...
+  &lt;a href="{% url 'name para la url' %}"&gt; &lt;/a&gt;
+
+</code></pre>
+</p>
+
+<p>
+   y en <code>restaurantes/models.py</code>, incluimos el esquema de mongoengine, como en
+   <i>Listing 17</i> de <a href="https://www.ibm.com/developerworks/library/os-django-mongo/">Using MongoDB with Django</a>
+</p>
+
+<p>
+   Algo como:
+   <pre><code class="language-python" data-lang="python">
+      # views.py
+      # ----------
+      
+      from django.shortcuts import render
+      from .models import restaurants
+
+      def listar(requests):
+         context = {
+            "resta": restaurants.objectcs[:5], # los cinco primeros
+         }
+         return render (requests, 'restaurantes/listar.html', context)
+   </code></pre>
+</p>
+
+<p>
+   Poner a funcionar una pantalla de entrada de datos y otra de consulta
+</p>
+<p>
+En 					<a href="http://django-marcador.keimlink.de/">
+						django-marcador</a> hay un tutorial completo 
+						<span style="color:gray; font-size:30%">(ojo, usa python2.7 y django 1.8)</span>
+</p>
+
+
+</div>
+<br /><br />
+
+</body>
+</html>

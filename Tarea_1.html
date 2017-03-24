@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Sirviendo contenidos</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/languages/python.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style>
+p {text-indent: 0em;
+   font-size: 120%;
+   margin-top: 2em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+   <br>
+   <h3>1.- Sirviendo contenidos</h3>
+   <p>
+      En esta tarea serviremos distintos tipos de contendios al navegador: texto plano, html,
+      imágenes. Para esto hay que cambiar la cabecera de HTTP
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">'Content-Type'</a>, donde
+      se especifica el <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">tipo mime</a>
+      del envio
+   </p>
+   <p>
+      La aplicación que hagamos, servirá:
+      <table class="table">
+         <tr>
+            <th>
+               Url
+            </th>
+            <th>
+               Contenido
+            </th>
+         </tr>
+         <tr>
+            <td>
+               "/un_texto_plano"
+            </td>
+            <td>
+               'Sirviendo texto plano'
+            </td>
+         </tr>
+         <tr>
+            <td>
+               "/contendio_html"
+            </td>
+            <td>
+               'Contenido <b>html</b>'
+            </td>
+         </tr>
+         <tr>
+            <td>
+               "/una_imagen"
+            </td>
+            <td>
+               La imágen, para visualizarla en el navegador
+            </td>
+         </tr>
+         <tr>
+            <td>
+               "/este_texto_plano/lo que sea"
+            </td>
+            <td>
+               'lo que sea'
+            </td>
+         </tr>
+      </table>
+   </p>
+
+   <p>
+      Para ello usaremos <a href="http://flask.pocoo.org/">Flask</a>, un 'microframework' de python. En
+      En <a href="http://flask.pocoo.org/docs/0.12/quickstart/">Quickstart</a>, hay una introducción a su uso.
+   </p>
+   <p>
+      Es conveniente, activar el ambiente de depuración durante la fase de desarrollo:
+      <a href="http://flask.pocoo.org/docs/0.12/config/">Configuration Handling</a>
+   </p>
+   <p>
+      Las cabeceras se pueden cambiar con la función
+       <a href="http://flask.pocoo.org/docs/0.12/quickstart/#about-responses">make_response</a>
+   </p>
+
+   <br>
+   <h3>2.- Sitio web estático con plantillas</h3>
+
+   <p>
+      Lo normal es usar <a href="http://flask.pocoo.org/docs/0.12/tutorial/templates/">plantillas</a>
+      para generar el html. Flask usa las plantillas de <a href="http://jinja.pocoo.org/docs/2.9/templates/">Jinja2</a> 
+   </p>
+   <p>
+      Podemos hacerlo siguiendo el tutorial de
+      <a href="https://code.tutsplus.com/tutorials/an-introduction-to-pythons-flask-framework--net-28822">
+      An Introduction to Python’s Flask Framework</a>
+   </p>
+   <p>
+      Y lo podemos completar añadiendo <a href="http://flask.pocoo.org/docs/0.12/patterns/errorpages/">
+         una página de error</a>
+   </p>
+
+</div>
+<br /><br />
+
+</body>
+</html>

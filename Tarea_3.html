@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Persistencia NO SQL</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-python.min.js"></script>
+
+<style>
+p {text-indent: 0em;
+   font-size: 120%;
+   margin-top: 2em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+   <br>
+   <h2>Persistencia No-SQL</h2>
+ <p>
+    En esta tarea usaremos un <b>O</b>ject <b>D</b>ocument <b>M</b>apper para usar
+    la BD <a href="https://docs.mongodb.com/getting-started/shell/introduction/">MongoDB</a>. Así se consigue
+    indepedizar (en parte) el código de la BD. Mongoengine es parecido al <a href="https://docs.djangoproject.com/en/1.10/topics/db/models/">
+   orm de django</a>
+ </p>
+ <p>
+    Tendremos que <a href="https://docs.mongodb.com/getting-started/shell/installation/">instalar la
+    BD</a>, y también <a href="http://mongoengine.org/">mongoengine</a>, para acceder a la BD desde
+    python
+ </p>
+<br /><br />
+<h3> Definir un esquema parla la BD, y hacer un script para rellenar la BD</h3>
+<p>
+Usaremos la BD <a href="https://docs.mongodb.com/getting-started/shell/import-data/">datos de test</a> de mongoDB, y haremos
+un script de población de la BD para añadir algunos restaurantes en Granada, y probar el ODM
+<br />
+<br />
+<b>populate.py</b>
+<pre><code class="language-python">
+from mongoengine import *
+import datetime
+
+connect('test')
+
+# Esquema para la BD de pruebas de mongoDB
+
+class addr(EmbeddedDocument):
+    building = StringField()
+    street   = StringField()
+    city     = StringField()   # añadido
+    zipcode  = IntField()
+    coord    = GeoPointField() # OJO, al BD de test estan a revés
+                               # [long, lat] en vez de [lat, long]
+
+class likes(EmbeddedDocument):
+    grade = StringField(max_length=1)
+    score = IntField()
+    date  = DateTimeField()
+
+class restaurants(Document):
+    name             = StringField(required=True, max_length=80)
+    restaurant_id    = IntField()
+    cuisine          = StringField()
+    borough          = StringField()
+    address          = EmbeddedDocumentField(addr)              # en la misma collección
+    grades           = ListField(EmbeddedDocumentField(likes))
+
+
+dir = addr(street="Hermosa, 5 ", city="Granada", zipcode=18010, coord=[37.1766872, -3.5965171])  # así están bien
+r = restaurants(name="Casa Julio", cuisine="Granaina", borough="Centro", address=dir)
+r.save()
+
+# Poner alguno más
+# ...
+
+# Consulta, los tres primeros
+for r in restaurants.objects[:3]:
+    print (r.name, r.address.coord, r.grades[0].date)
+
+# Hacer más consultas, probar las de geolocalización
+# ...
+</code></pre>
+</p>
+<p>
+   Se pueden añadir más validaciones, o valores por defecto
+    (<a href="http://docs.mongoengine.org/guide/defining-documents.html">Defining Documents</a>)
+</p>
+<p>
+
+    Añadir varios restaurantes y probar las <a href="http://docs.mongoengine.org/guide/querying.html">consultas a la BD</a>.
+    Para averiguar las coordenadas se puede usar el <a href="https://developers.google.com/maps/documentation/geocoding/intro">
+   servicio de geocodificación de google</a>, p.e.
+<pre>
+<a href="http://maps.googleapis.com/maps/api/geocode/json?address=Bar+Casa+Juilo+Granada">
+http://maps.googleapis.com/maps/api/geocode/json?address=Bar+Casa+Juilo+Granada</a>
+</pre>,
+que devueleve un string <a href="https://docs.python.org/3/library/json.html">JSON</a>. o en XML
+<pre>
+<a href="http://maps.googleapis.com/maps/api/geocode/xml?address=Bar+Casa+Juilo+Granada">
+http://maps.googleapis.com/maps/api/geocode/xml?address=Bar+Casa+Juilo+Granada</a>
+</pre>,
+
+<br />
+Para el requerimento se puede usar la librería <a href="http://docs.python-requests.org/en/master/">requests</a>
+</p>
+
+</div>
+<br /><br />
+
+</body>
+</html>
