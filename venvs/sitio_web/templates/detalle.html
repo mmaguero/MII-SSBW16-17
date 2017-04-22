@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+<script>
+$(function(){                          // jQuery functions
+
+ 		$('#btd').click(function() {
+                //$('#myModal').modal();
+		$.ajax({
+
+		   url: "{% url 'r_ajax' resta.name %}",
+
+		   type: 'GET',
+
+		   data: {},
+
+		   error: function() {
+				alert('Error en llamada Ajax');
+		   },
+
+		   dataType: 'json',   // espera json en la respuesta
+
+		   success: function(data) {
+                      console.log(data)
+                      $('#aqui').html(data.map);
+                      $('#myModal').modal();
+		   },
+		});  // ajax
+
+    	}); // click
+}); // $
+</script>
+
+<div class="jumbotron">
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+    <h2 class="media-heading">{{ resta.name }}</h2>
+    <p><i class="text-info">{{ resta.cuisine }}</i></p>
+    <address>{{ resta.address.street }}, {{ resta.address.building }} <br>
+       {{ resta.address.zipcode }}, {{ resta.address.city }}</address>
+ </div>
+
+ <button id="btd" type="button" class="btn btn-link">
+  Localize it!
+ </button>
+
+  </div>
+
+  {% if resta.image %}
+     <img src="{% url 'imagen' resta.name %}" alt="{{ resta.name }}" class="img-fluid img-thumbnail center-block">
+  {% else %}
+     <div class="container"><img src="#" alt="No Image" class="img-fluid img-thumbnail center-block"></div>
+  {% endif %}
+</div>
+
+<!-- Button trigger modal
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ resta.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="aqui">
+        ...Contenido
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -36,7 +36,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/marvin/venvs/djproject"
+set -gx VIRTUAL_ENV "/media/marvin/8868F00968EFF43A/Academico/MII/SSBW/MII-SSBW16-17/venvs"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

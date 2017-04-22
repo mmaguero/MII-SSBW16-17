@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'restaurantes',
+    'restaurantes', # add my app
+    'registration', # add in the registration package
+    'rest_framework', # add my rest default
+    'rest_framework_mongoengine', # add my rest support
 ]
 
 MIDDLEWARE = [
@@ -121,3 +124,59 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+REGISTRATION_OPEN = True        # If True, users can register
+ACCOUNT_ACTIVATION_DAYS = 7     # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
+LOGIN_REDIRECT_URL = '/resta/'  # The page you want users to arrive at after they successful log in
+LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
+                                # and are trying to access pages requiring authentication
+
+LOG_FILE = 'restaurantes.log'
+
+LOGGING = {
+          'version': 1,
+
+          'disable_existing_loggers': False,
+
+          'formatters': {
+
+              'verbose': {
+                  'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+                  'datefmt' : "%d/%b/%Y %H:%M:%S"
+              },
+
+              'simple': {
+                  'format': '%(levelname)s [%(name)s:%(lineno)s] %(message)s'
+              },
+          },
+
+          'handlers': {
+
+              'file': {
+                  'level': 'INFO',
+                  'class': 'logging.FileHandler',
+                  'filename': os.path.join(BASE_DIR, LOG_FILE),
+                  'formatter': 'verbose',
+                  'mode':'w'
+              },
+
+              'console': {
+                  'level': 'DEBUG',
+                  'class': 'logging.StreamHandler',
+                  'formatter': 'simple'
+              }
+          },
+
+          'loggers': {
+              'django': {
+                  'handlers':['file'],
+                  'propagate': True,
+                  'level':'ERROR',
+              },
+
+              'restaurantes': {
+                  'handlers': ['file', 'console'],
+                  'level': 'DEBUG',
+              },
+          }
+      }

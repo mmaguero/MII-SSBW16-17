@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/marvin/venvs/djproject"
+VIRTUAL_ENV="/media/marvin/8868F00968EFF43A/Academico/MII/SSBW/MII-SSBW16-17/venvs"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
