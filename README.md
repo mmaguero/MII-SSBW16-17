@@ -14,6 +14,6 @@ Proyectos Web de la asignatura de Sistemas Software Basados en Web del Máster U
 + [Tarea 8](https://github.com/mmaguero/MII-SSBW16-17/blob/master/Tarea_8.html)
 
 ## Soluciones
-+ [Bootstrap + JQuery + Flask](https://github.com/mmaguero/MII-SSBW16-17/tree/master/flaskapp)
++ [Bootstrap + Flask](https://github.com/mmaguero/MII-SSBW16-17/tree/master/flaskapp)
 + [Mongodb, Google Maps API](https://github.com/mmaguero/MII-SSBW16-17/tree/master/persistencia)
 + [Bootstrap + JQuery + Django + Mongodb](https://github.com/mmaguero/MII-SSBW16-17/tree/master/venvs)
