@@ -2,9 +2,9 @@
 
 Proyectos Web de la asignatura de Sistemas Software Basados en Web del Máster Universitario en Ingeniería Informática del curso 2016-17
 
-### Backend + Fronted "Single Page Application" + Despliegue "Contenedores"
+## Backend + Fronted "Single Page Application" + Despliegue "Contenedores"
 
-## Enunciados
+### Enunciados
 + [Tarea 0](https://github.com/mmaguero/MII-SSBW16-17/blob/master/Tarea_0.html)
 + [Tarea 1](https://github.com/mmaguero/MII-SSBW16-17/blob/master/Tarea_1.html)
 + [Tarea 2](https://github.com/mmaguero/MII-SSBW16-17/blob/master/Tarea_2.html)
@@ -19,14 +19,14 @@ Proyectos Web de la asignatura de Sistemas Software Basados en Web del Máster U
 + [Tarea 10](https://github.com/mmaguero/MII-SSBW16-17/blob/master/Tarea_10.html)
 + [Tarea Final](https://github.com/mmaguero/MII-SSBW16-17/blob/master/Entrega.html)
 
-## Soluciones
+### Soluciones
 - [x] [Flask + Bootstrap](https://github.com/mmaguero/MII-SSBW16-17/tree/master/flaskapp)
 - [x] [MongoDB, Google Maps API](https://github.com/mmaguero/MII-SSBW16-17/tree/master/persistencia)
 - [x] [Django + Bootstrap + MongoDB + API REST](https://github.com/mmaguero/MII-SSBW16-17/tree/master/venvs)
 - [] [ReactJS + Bootstrap](https://github.com/mmaguero/MII-SSBW16-17/tree/master/fronted)
 - [] [Docker + Docker-compose](https://github.com/mmaguero/MII-SSBW16-17/tree/master/deploy)
 
-## Tecnologías
+### Tecnologías
 - [x] HTML
 - [x] CSS
 - [x] Bootstrap
