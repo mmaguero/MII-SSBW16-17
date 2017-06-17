@@ -12,13 +12,13 @@ class addr(EmbeddedDocument):
     building = StringField()
     street   = StringField()
     city     = StringField()   # anhadido
-    zipcode  = IntField()
+    zipcode  = StringField()
     coord    = GeoPointField() # OJO, al BD de test estan a reves
                                # [long, lat] en vez de [lat, long]
 
 class likes(EmbeddedDocument):
     grade = StringField(max_length=1)
-    score = IntField()
+    score = StringField()
     date  = DateTimeField()
 
 # class image(EmbeddedDocument):
@@ -26,8 +26,8 @@ class likes(EmbeddedDocument):
 #   img = ImageField(size=(800, 600, True))
 
 class restaurants(Document):
-    name             = StringField(required=True, max_length=80)
-    restaurant_id    = IntField()
+    name             = StringField(required=True, max_length=80)  # unique=True for duplications
+    restaurant_id    = StringField()
     cuisine          = StringField()
     borough          = StringField()
     address          = EmbeddedDocumentField(addr)              # en la misma colleccion

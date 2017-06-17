@@ -41,7 +41,17 @@ INSTALLED_APPS = [
     'registration', # add in the registration package
     'rest_framework', # add my rest default
     'rest_framework_mongoengine', # add my rest support
+    'rest_framework.authtoken', # add for API auth
 ]
+
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+   ),
+   'DEFAULT_PERMISSION_CLASSES': (
+       'rest_framework.permissions.IsAuthenticated',
+   )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

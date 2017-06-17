@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Despliegue</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-markup.min.js"></script>
+<style>
+p {text-indent: 0em;
+   font-size: 120%;
+   margin-top: 2em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+   <br>
+   <h2>Despliegue</h2>
+<p>
+	La última práctica consiste en tener una aplicación web desplegada en un ambiente de 'producción',
+	es decir funcionando con la depuración en 'OFF' y conectada
+	a un servidor web como <a href="https://www.nginx.com/">ngix</a> o <a href="http://httpd.apache.org/">apache</a> en
+	el puerto 80
+</p>
+<p>
+	El despliegue de una aplicación con django, está contada en:
+    <a href="https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/">How to deploy with WSGI
+    </a>, <a href="https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/gunicorn/">How to use Django with Gunicorn</a>,
+    <a href="http://docs.gunicorn.org/en/latest/deploy.html">Deploying Gunicorn</a>,
+    <a href="http://docs.gunicorn.org/en/latest/deploy.html#supervisor">Supervisor</a>, y en las transparencias de clase.
+</p>
+
+
+<p>
+Básicamente consiste en poner la configuración de producción, es decir en el archivo
+<b>settings.py</b> estarán las variables:
+</p>
+<pre>
+DEBUG = False
+
+ALLOWED_HOSTS = ['*']
+</pre>
+<p>
+
+Con esto dejará de funcionar el servidor de desarrollo, y de servir los contenidos de <b>/static</b>, que tendrán
+que pasar a servirse desde el servidor web de producción. Django tiene un script: <a href="https://docs.djangoproject.com/en/1.10/ref/contrib/staticfiles/">collectstatic</a>
+para facilitar pasar los contenidos a otro directorio.
+</p>
+
+<p>
+   Después habrá que poner funcionar la aplicación con un servidor web <a href="https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">wsgi</a>,
+   (p.e. <a href="http://gunicorn.org/">gunicorn</a>)
+   y conectar la aplicación, y el resto de servicios que pudiera haber (los arhivos static), a un servidor
+    web que también
+   funcione como <a href="https://en.wikipedia.org/wiki/Reverse_proxy">proxy inverso</a> (p.e. <a href="https://www.nginx.com/">nginx</a>)
+   en el puerto 80
+</p>
+
+<p>
+   Para automatizar el proceso, podremos hacer algún script con <a href="https://en.wikipedia.org/wiki/Makefile">Makefile</a>,
+</p>
+<p>
+	El despliegue se puede hacer en un contenedor usando <a href="https://www.docker.com/">docker</a>, y
+	<a href="https://docs.docker.com/compose/">docker-compose</a> (ejemplo con <a href="https://docs.docker.com/compose/django/"
+	>django</a>)
+</p>
+
+
+</div>
+<br /><br />
+
+
+</body>
+</html>

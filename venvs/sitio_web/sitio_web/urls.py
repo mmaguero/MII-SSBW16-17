@@ -16,8 +16,18 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
+
+router = DefaultRouter()
+
+urlpatterns = router.urls
+
 urlpatterns = [
     url(r'^resta/', include('restaurantes.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^obtain-auth-token/$', csrf_exempt(obtain_auth_token)),
 ]
