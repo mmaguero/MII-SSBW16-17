@@ -23,7 +23,7 @@ Proyectos Web de la asignatura de Sistemas Software Basados en Web del Máster U
 - [x] [Flask + Bootstrap](https://github.com/mmaguero/MII-SSBW16-17/tree/master/flaskapp)
 - [x] [MongoDB, Google Maps API](https://github.com/mmaguero/MII-SSBW16-17/tree/master/persistencia)
 - [x] [Django + Bootstrap + MongoDB + API REST](https://github.com/mmaguero/MII-SSBW16-17/tree/master/venvs)
-- [] [ReactJS + Bootstrap](https://github.com/mmaguero/MII-SSBW16-17/tree/master/fronted)
+- [] [ReactJS + Bootstrap](https://github.com/mmaguero/MII-SSBW16-17/tree/master/frontend)
 - [] [Docker + Docker-compose](https://github.com/mmaguero/MII-SSBW16-17/tree/master/deploy)
 
 ### Tecnologías
