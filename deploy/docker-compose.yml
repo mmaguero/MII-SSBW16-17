@@ -1,15 +1,23 @@
-version: '0'
- services:
-   db:
-     image: mongodb
-     volumes:
-       - /var/lib/mongodb:/var/lib/mongodb
-   web:
-     build: .
-     command: python3 manage.py runserver 0.0.0.0:8000
-     volumes:
-       - /home/marvin/Documentos/MII-SSBW16-17/venvs/sitio_web:/sitio_web
-     ports:
-       - "8000:8000"
-     depends_on:
-       - db
+version: '3'
+services:
+  db:
+    container_name: restaurant_db
+    build:
+      context: db
+      dockerfile: Dockerfile
+  app:
+    container_name: restaurant_app
+    build:
+      context: app
+      dockerfile: Dockerfile
+    links:
+      - db
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: restaurant_nginx
+    links:
+      - app
+    ports:
+      - '80:80'
