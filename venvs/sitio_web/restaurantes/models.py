@@ -5,7 +5,8 @@ import datetime
 import PIL
 
 #mongoimport --db test --collection restaurants --drop --file primer-dataset.json
-connect('test') #host='localhost', port=27017
+#connect('test') #host='localhost', port=27017
+connect('test', host='restaurant_db', port=27017)
 
 # Esquema para la BD de mongoDB
 class addr(EmbeddedDocument):

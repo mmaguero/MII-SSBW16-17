@@ -82,6 +82,12 @@ celerybeat-schedule
 # virtualenv
 venv/
 ENV/
+venv/lib/
+venv/include/
+venv/bin/
+flaskapp/lib/
+flaskapp/include/
+flaskapp/bin/
 
 # Spyder project settings
 .spyderproject
