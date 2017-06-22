@@ -16,7 +16,7 @@ services:
     build:
       context: nginx
       dockerfile: Dockerfile
-    container_name: restaurant_nginx
+    container_name: restaurant_server
     links:
       - app
     ports:
