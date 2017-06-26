@@ -98,7 +98,7 @@ def restaurant(request, name):
   log.info("DETAIL - Hey there it works!!")
   resta=restaurants.objects(name=name)[0]
   context = {
-      'resta': resta,
+      'resta': resta
   }
   return render(request, 'detalle.html', context)
 
@@ -113,5 +113,5 @@ def imagen(request, name):
 def r_ajax(request, name):
   log.info("AJAX - Hey there it works!!")
   resta = restaurants.objects(name=name)[0]
-  maps = '<iframe width="450" height="300" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>'
+  maps = '<iframe width="450" height="300" frameborder="0" style="border:0" src="https://maps.google.com/maps?q='+str(name) + ' ' + str(resta.address.street) + ' ' + str(resta.borough)+'&amp;ie=UTF8&amp;&amp;output=embed" allowfullscreen></iframe>'
   return JsonResponse({'map':maps})    # podría ser string o HTML

@@ -5,6 +5,8 @@ services:
     build:
       context: db
       dockerfile: Dockerfile
+    volumes:
+      - /home/vagrant/restaurant_db:/data/db
   app:
     container_name: restaurant_app
     build:
