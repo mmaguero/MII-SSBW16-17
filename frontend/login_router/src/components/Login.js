@@ -48,18 +48,19 @@ handleSubmit(evt) {
     method: 'post',
     url: 'http://localhost:8080/obtain-auth-token/',
     data: {
-      username: 'admin',
-      password: 'adminadmin'
+      username: this.state.name,
+      password: this.state.pass,
     },
     contentType: "application/x-www-form-urlencoded",
     responseType:'json',
 
   }).then((response) => {
-    console.log(response.data.token);
+    console.log(response);
     localStorage.token = response.data.token;
   })
   .catch((error) => {
     console.log(error);
+    alert("Ha ocurrido un error");
   });
 
 }
