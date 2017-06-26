@@ -5,7 +5,6 @@ import axios from 'axios'
 
 import Fila from './Fila'
 
-
 class Lista extends Component {
   constructor() {
     super()
@@ -16,10 +15,14 @@ class Lista extends Component {
 
   componentDidMount() {
     let _this = this;
-    axios.get('https://api.github.com/users/mzabriskie/repos')
-       .then(function(response) {
+    const AuthStr = 'Token '.concat(localStorage.getItem('token'));
+    axios.get('http://localhost:8080/resta/api/restaurants/',
+    { headers: { Authorization: AuthStr } })
+    .then(function(response) {
          _this.setState({r:response.data})
-    });
+    }).catch((error) => {
+            console.log('error ' + error);
+          });
   }
 
   render() {

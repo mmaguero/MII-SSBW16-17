@@ -46,15 +46,17 @@ handleSubmit(evt) {
 
   axios({
     method: 'post',
-    url: 'http://localhost:8000/obtain-auth-token/',
+    url: 'http://localhost:8080/obtain-auth-token/',
     data: {
       username: 'admin',
       password: 'adminadmin'
     },
+    contentType: "application/x-www-form-urlencoded",
     responseType:'json',
 
   }).then((response) => {
-    console.log(response);
+    console.log(response.data.token);
+    localStorage.token = response.data.token;
   })
   .catch((error) => {
     console.log(error);
