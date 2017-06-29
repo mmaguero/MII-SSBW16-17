@@ -30,7 +30,7 @@ class Lista extends Component {
       <div>
       { this.state.r.map(function(r, index) {
           return (
-            <Fila key={index} name={r.name +' ('+ r.cuisine+')'} url={r.html_url}/>
+            <Fila key={index} name={r.name} cuisine={r.cuisine} url={r.html_url}/>
           )
         })
       }

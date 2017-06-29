@@ -13,7 +13,7 @@ class Fila extends Component {
     return (
       <div>
          <a href={this.props.url}>{this.props.name}</a>
-         &nbsp;&nbsp;<span style={{color:'red'}} onClick={this.doclick.bind(this)}>X</span>
+         &nbsp;&nbsp;<span style={{color:'red'}} onClick={this.doclick.bind(this)}><b>X</b></span>
       </div>
     )
   }

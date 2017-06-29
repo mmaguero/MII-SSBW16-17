@@ -53,7 +53,7 @@ const nombre = (state=initialState_n, action) => {
   switch (action.type) {
 
       case DETALLAR:
-        return { ...state, nombre: action.nombre }
+        return { ...state, nombre: action.nombre, cuisine: action.cuisine }
 
     default:
       return state

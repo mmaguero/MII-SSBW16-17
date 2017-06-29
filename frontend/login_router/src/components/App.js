@@ -12,6 +12,7 @@ import './App.css'
 
 import Lista from './Lista'
 import Login from './Login'
+import Search from './Search'
 
 import { DETALLAR } from '../actions'
 
@@ -75,10 +76,6 @@ componentWillReceiveProps () {
         <Navbar.Collapse>
           <Nav>
 
-             <IndexLinkContainer to="/añadir">
-                <NavItem>Añadir</NavItem>
-             </IndexLinkContainer>
-
              <IndexLinkContainer to="/listar">
                 <NavItem>Listar</NavItem>
              </IndexLinkContainer>
@@ -100,7 +97,8 @@ componentWillReceiveProps () {
         </Navbar.Collapse>
       </Navbar>
 
-      {this.props.botón === DETALLAR &&
+      {
+        this.props.botón === DETALLAR &&
         <div>Detallando <b>{this.props.detalle}</b> (desde redux)
         </div>
       }
