@@ -1,8 +1,9 @@
-# Python Microframework
+# ReactJS Frontend
 
-+ Vagrant
-+ Docker
-+ Docker Compose 
++ ReactJS
++ Webpack
++ JSX
++ ECMA6
 
 Corresponde a
 
